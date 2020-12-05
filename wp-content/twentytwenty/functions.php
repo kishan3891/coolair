@@ -934,6 +934,13 @@ function update_csv_data() {
 				update_post_meta($data[0], 'dropshipper_shipping_info_' . get_current_user_id(), $trackingInfo);
 				update_field('tracking_number', $data[11], $data[0]);
 				update_field('tracking_website', $data[12], $data[0]);
+				//Update order status code added 4.12.2020
+				if(!empty($data[11]) && !empty($data[12])){
+					$order_id = $data[0];
+					$order = new WC_Order($order_id);
+					$order->update_status('completed', 'order_note');
+				}
+
 			}
 			fclose($handle);
 		}
