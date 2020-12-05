@@ -1,0 +1,204 @@
+@media only screen and (max-width:1169px){
+	.bnr-cont-inner{padding: 30px 25px 40px 25px;}
+	.discount-sec .discount-inner-cont{max-width: 76%;padding-left: 15px;}
+	h4{font-size: 21px;}
+	.discount-sec{padding: 25px;}
+	.best-seller{left: 11%;}
+	.step-sec2{margin-top: 35px;}
+	.step-sec h4{margin-bottom: 15px;}
+	.middle-right-left h3{font-size: 30px;}
+	.middle-right-left span{font-size: 13px;margin-bottom: 8px;}
+	.step-sec3{margin-top: 20px;}
+	.step-sec3 h4{margin-bottom: 10px;}
+	.warranty-sec{margin: 0 -25px;margin-top: 20px;padding-top: 25px;height: 60px;line-height: normal;}
+	.right-btm-cont ul li{max-width: 30%;}
+	.pi-popup {width: 40vw;}
+	.pi-popup-image {width: 20%;}
+}
+
+@media only screen and (max-width:1024px){
+
+	.warranty_info p {
+	    max-width: 68%;
+	}
+	.warranty_info {
+	    padding: 10px 10px;
+	}
+	.warranty_info:before {
+		border-left: 12px solid #fdf035;
+		border-top: 12px solid #ed1d23;
+		border-bottom: 12px solid #ed1d23;
+		width: 90px;
+	}
+
+}
+
+@media only screen and (max-width:1000px){
+	.header-inner {	padding: 10px 0;z-index: 100; 	display: inline-block; 	width: 100%; 	text-align: left; }
+	.header-titles-wrapper {align-items: last baseline; display: inline-block; 	justify-content: center; 	padding: 0 15px; 	text-align: center; float:left; }
+	.header-titles{display: inline-block; text-align: left;}
+	#gtranslate_wrapper {padding: 12px 10px;}
+
+}
+
+@media only screen and (max-width:991px){
+	body.single-product header {
+		height: 90px;
+		padding-top: 26px;
+	}
+	.bnr-cont-inner{padding: 30px 25px 30px 25px;}
+	.bnr-cont-inner ul li{margin-bottom: 7px;line-height: normal;}
+	.bnr-cont-inner ul li:last-child{margin-bottom: 0;}
+	.bnr-cont-inner ul li:before{top: 6px;}
+/*	header{line-height: 90px;}*/
+	.logo{max-width: 230px; margin: 0 auto; position: relative; top: -4px;}
+	.discount-sec .discount-inner-cont{max-width: 70%;}
+	.discount-sec figure{max-width: 25%;}
+	h4{font-size: 18px;line-height: normal;}
+	h4 br{display: none;}
+	.step-sec ul li .total-price font{margin-left: 0px;display: block;margin-top: 5px;}
+	.step-sec ul li{padding: 18px 10px;}
+	.best-seller{padding: 4px 8px;}
+	/*.best-seller:before, .best-seller:after{border-top: 20px solid #ed2422;}*/
+	.middle-right-img{display: none;}
+	.warranty-sec{height: auto;padding-bottom: 10px;padding-top: 20px;}
+	.warranty-sec [type="checkbox"]:checked + label:before, .warranty-sec [type="checkbox"]:not(:checked) + label:before{top: 5px;}
+	.warranty-sec [type="checkbox"]:checked + label:after, .warranty-sec [type="checkbox"]:not(:checked) + label:after{top: 8px;}
+	.submit-btn input{font-size: 13px;}
+	.right-btm-cont ul li{max-width: 29%;}
+	.middle-content{padding-bottom: 40px;}
+	footer{padding: 20px 0;}
+	.woocommerce #payment #place_order, .woocommerce-page #payment #place_order {
+		height: auto;
+		line-height: normal;
+	}
+	.step-sec ul li .total-price del {
+		width: 100%;
+		display: block;
+	}
+
+	
+}
+
+@media only screen and (max-width:768px){
+	.pi-popup-image {
+		width: 70px !important;
+	}
+	.pi-popup {
+		width: 55vw !important;
+		bottom: 10px !important;
+		left: 15px !important;
+		border-radius: 5px !important;
+	}
+}
+
+@media only screen and (max-width:767px){
+	.discount-sec .discount-inner-cont{max-width: 74%;}
+	.middle-right-img{display: block;}
+	.logo{max-width: 200px;}
+	.bnr-cont-inner ul{margin-top: 30px;}
+	.bnr-special-offer p br{display: none;}
+	.middle-right-cont{margin-top: 30px;}
+	.foot-link li{padding-right: 9px;margin-right: 6px;}
+	footer .foot-social{margin-bottom: 10px;}
+	footer .foot-social li{margin-right: 10px;}
+	.step-sec .col-md-6 {
+		width: 100% !important;
+	}
+	.opc_order_review .col-lg-8 {
+		width: 60%;
+		padding-right: 0;
+	}
+	.opc_order_review .col-lg-4 {
+		width: 40%;
+		padding-right: 0;
+	}
+	.opc_order_review .row {
+		margin-bottom: 20px;
+	}
+	.temaplate_3_p_banner .img img {
+		margin: 0 auto;
+	}
+	.temaplate_3_p_banner h1 {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	.temaplate_3_p_banner {
+		padding: 20px 0;
+	}
+
+	.woocs_auto_switcher {
+	    display: none;
+	}
+	body.single-product header.temp_head_2 {
+		margin-bottom: 40px;
+	}
+	body.single-product header.temp_head_2 img.mobile{
+		display: block;
+	}
+	body.single-product header.temp_head_2 img.desktop{
+		display: none;
+	}
+}
+
+@media only screen and (max-width:699px){
+	.cd-dropdown-wrapper a.meanmenu-reveal {
+		top: 10px !important;
+	}
+}
+
+@media only screen and (max-width:575px){
+	.discount-sec .discount-inner-cont{max-width: 72%;}
+	.step-sec{padding: 30px 20px 20px;}
+	.warranty-sec [type="checkbox"]:checked + label:before, .warranty-sec [type="checkbox"]:not(:checked) + label:before{top: 2px;}
+	.step-sec1 .col-sm-6{-ms-flex: 0 0 50%; flex: 0 0 50%; max-width: 50%;}
+	.bnr-special-offer{padding: 0 15px 15px;}
+	.pi-popup {width: 74vw !important;}
+	.discount-sec {position: relative;}
+	.discount-inner-cont p{position: absolute;left: 20px;}
+	.discount-sec figure{vertical-align: top;}
+	.discount-inner-cont p em {display: inline-block; margin-right: 5px;}
+	.discount-inner-cont p em:last-child{margin-right: 0px;}
+	.template_1 .middle-right-cont {
+		padding: 20px;
+	}
+	.temp_head_2 .feature_block .col-sm-4, header.temp_head_2 .col-md-4 img {
+		text-align: center;
+		margin-bottom: 15px;
+	}
+	.temp_head_2 .feature_block .col-sm-4:last-child {
+		margin-bottom: 0;
+	}
+	.temp_head_2 .feature_block .features_div {
+		margin: 0 auto;
+	}
+	.template_2 .middle-left-cont .step-sec .step-sec1, .template_2 .middle-left-cont .step-sec .step-sec2 {
+    	padding: 20px 15px;
+	}
+}
+
+@media only screen and (max-width:479px){
+	/*.discount-sec .discount-inner-cont{max-width: 100%;padding-left: 0;}
+	.discount-sec figure{max-width: 100%;display: block;margin-bottom: 20px;}*/
+	h4{font-size: 17px;}
+	.discount-sec{padding: 20px 15px 60px;}
+	.step-sec ul li .total-price ins {margin-left: 10px;}
+	.contact-info-col{width: 114px;}
+	footer{font-size: 14px;}
+	footer p, footer p a{font-size: 14px;}
+	.bnr-cont-inner ul li{font-size: 16px;}
+	form.template_1 .woocommerce-billing-fields__field-wrapper p.form-row {
+		width: 100%;
+	}
+	
+}
+@media only screen and (max-width:400px){
+	.pi-popup {
+		width: 100% !important;
+		bottom: 0 !important;
+		left: 0 !important;
+		border-radius: 0 !important;
+	}
+
+	
+}

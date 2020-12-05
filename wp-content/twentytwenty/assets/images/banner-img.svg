@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1901" height="409" viewBox="0 0 1901 409">
+    <defs>
+        <path id="eynd9981pa" d="M0.181 0.059L1900.421 0.059 1900.421 408.059 0.181 408.059z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="lds0ukpbxb" fill="#fff">
+            <use xlink:href="#eynd9981pa"/>
+        </mask>
+        <use fill="#F4F5F7" fill-rule="nonzero" xlink:href="#eynd9981pa"/>
+        <circle cx="28.167" cy=".167" r="79.167" fill="#173D72" fill-rule="nonzero" mask="url(#lds0ukpbxb)" opacity=".02"/>
+        <circle cx="134.639" cy="200.444" r="79.167" fill="#173D72" fill-rule="nonzero" mask="url(#lds0ukpbxb)" opacity=".02"/>
+        <circle cx="359.604" cy="301.382" r="131.285" fill="#173D72" fill-rule="nonzero" mask="url(#lds0ukpbxb)" opacity=".02"/>
+        <circle cx="1171.722" cy="284.889" r="26.389" fill="#173D72" fill-rule="nonzero" mask="url(#lds0ukpbxb)" opacity=".02"/>
+        <circle cx="1781.306" cy="-48.931" r="79.167" fill="#173D72" fill-rule="nonzero" mask="url(#lds0ukpbxb)" opacity=".02"/>
+        <circle cx="1724.569" cy="258.5" r="52.778" fill="#173D72" fill-rule="nonzero" mask="url(#lds0ukpbxb)" opacity=".02"/>
+        <circle cx="1645.403" cy="337.667" r="79.167" fill="#173D72" fill-rule="nonzero" mask="url(#lds0ukpbxb)" opacity=".02"/>
+    </g>
+</svg>
