@@ -1037,3 +1037,8 @@ add_action( 'isa_add_every_three_minutes', 'every_three_minutes_event_func' );
 function every_three_minutes_event_func() {
     wp_mail( 'kishan@techtic.com', 'Automatic email', 'Automatic scheduled email from WordPress.');
 } */
+
+add_shortcode( 'rand', 'countdown_rand_func' );
+function countdown_rand_func( $atts ) {
+    return rand(49,99);
+}
