@@ -753,7 +753,7 @@ function do_this_once_daily() {
 			'numberposts' => -1,
 			'meta_key'    => '_customer_user',
 			'post_type'   => wc_get_order_types(),
-			'post_status' => array_keys( wc_get_order_statuses() ),
+			'post_status' => array_keys( wa_get_order_statuses() ),
 			'fields' => 'ids',
 			'meta_query' => array(
 				'relation' => 'AND',
@@ -827,7 +827,9 @@ function do_this_once_daily() {
 			));
 		}
 		fclose($file);
-		wp_mail( $suppMeta['order_email_addresses'], 'Your Order List', 'Please check your order list attached.', '', $filepath);
+		$headers = array('Content-Type: text/html; charset=UTF-8');
+		$headers[] = 'Cc: patrick.kalns@mcaffic.com';
+		wp_mail( $suppMeta['order_email_addresses'], 'Your Order List', 'Please check your order list attached.',$headers, $filepath);
 		//wp_mail( 'kishan@techtic.com', 'Daily email once testing', 'Daily email once testing', '', $filepath);
 	}
 }
@@ -934,13 +936,13 @@ function update_csv_data() {
 				update_post_meta($data[0], 'dropshipper_shipping_info_' . get_current_user_id(), $trackingInfo);
 				update_field('tracking_number', $data[11], $data[0]);
 				update_field('tracking_website', $data[12], $data[0]);
+
 				//Update order status code added 4.12.2020
 				if(!empty($data[11]) && !empty($data[12])){
 					$order_id = $data[0];
 					$order = new WC_Order($order_id);
 					$order->update_status('completed', 'order_note');
 				}
-
 			}
 			fclose($handle);
 		}
@@ -1041,4 +1043,61 @@ function every_three_minutes_event_func() {
 add_shortcode( 'rand', 'countdown_rand_func' );
 function countdown_rand_func( $atts ) {
     return rand(49,99);
+}
+
+// Added Warranty to confirmations email.
+add_action( 'woocommerce_order_item_meta_end', 'waf_order_item_meta_end', 10, 4 );
+function waf_order_item_meta_end( $item_id, $item, $order, $plain_text ){
+	$status = $order->status; 
+	if($status == 'processing'){
+	$name = $value = $expiry = false;
+	$order_id  = $order->get_id(); 
+	$order      = wc_get_order( $order_id );
+	$product_warranty = warranty_get_product_warranty( $item['product_id'] );
+    $warranty['label'] = $product_warranty['label'];
+   //code added
+	if ( empty( $warranty['label'] ) ) {
+		$product_warranty = warranty_get_product_warranty( $item['product_id'] );
+		$warranty['label'] = $product_warranty['label'];
+	}
+	if ( $product_warranty['type'] == 'addon_warranty' ) {
+	$addons = $product_warranty['addons'];
+	$warranty_index = wc_get_order_item_meta( $item_id, '_item_warranty_selected', true );
+	if ( $warranty_index !== false && isset($addons[$warranty_index]) && !empty($addons[$warranty_index]) ) {
+	    $addon  = $addons[$warranty_index];
+	    $name   = $warranty['label'];
+	    $value  = $GLOBALS['wc_warranty']->get_warranty_string( $addon['value'], $addon['duration'] );
+	}
+	} elseif ( $product_warranty['type'] == 'included_warranty' ) {
+		if ( $warranty['length'] == 'limited' ) {
+		    $name   = $warranty['label'];
+		    $value  = $GLOBALS['wc_warranty']->get_warranty_string( $product_warranty['value'], $product_warranty['duration'] );
+		}
+	}
+	if ( !$name || ! $value ) {
+    return;
+	}
+	?>
+
+	<table cellspacing="0" class="display_meta">
+	    <tr>
+	        <th><?php echo wp_kses_post( $name ); ?>:</th>
+	        <td><?php
+	            echo wp_kses_post( $value );
+	        ?></td>
+	    </tr>
+	</table>
+	<?php
+  }
+}
+
+
+//Code added for status filter
+function wa_get_order_statuses() {
+  $order_statuses = array(
+    'wc-pending'    => _x( 'Pending payment', 'Order status', 'woocommerce' ),
+    'wc-processing' => _x( 'Processing', 'Order status', 'woocommerce' ),
+    'wc-completed'  => _x( 'Completed', 'Order status', 'woocommerce' ),
+  );
+  return apply_filters( 'wa_order_statuses', $order_statuses );
 }

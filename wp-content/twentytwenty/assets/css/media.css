@@ -56,6 +56,7 @@
 	.discount-sec figure{max-width: 25%;}
 	h4{font-size: 18px;line-height: normal;}
 	h4 br{display: none;}
+	.template_2 h4 br{display: block;}
 	.step-sec ul li .total-price font{margin-left: 0px;display: block;margin-top: 5px;}
 	.step-sec ul li{padding: 18px 10px;}
 	.best-seller{padding: 4px 8px;}

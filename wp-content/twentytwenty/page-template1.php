@@ -451,7 +451,7 @@ else {
 		</div>
 	</div>
 	<div class="claim-discount wow flash" <?php echo (get_field('claim_discount_background', $page_id)) ? 'style="background: '.get_field('claim_discount_background', $page_id).'"' : ''; ?>>
-			<a href="#"><?php the_field('claim_discount_offer', $page_id);?></a>
+			<a href="<?php the_sub_field('cta_link');?>"><?php the_field('claim_discount_offer', $page_id);?></a>
 	</div>
 </section>
 
