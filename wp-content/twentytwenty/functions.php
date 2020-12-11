@@ -527,14 +527,14 @@ function variation_add_to_cart_func() {
 
 	$cart_item_data = array(
 		'warranty_index' => $warranty_index,
-		'custom_price' => $final_price
+		'custom_price' => $final_price,
+		'clickid' => $_POST['clickid']
 	);
 	$woocommerce->cart->add_to_cart($_POST['productID'], $qty, $_POST['variationID'], null, $cart_item_data);
 	$woocommerce->cart->calculate_totals();
 	$woocommerce->cart->set_session();
 	$woocommerce->cart->maybe_set_cart_cookies();
 	wp_die();
-
 }
 
 
@@ -581,18 +581,23 @@ add_filter( 'woocommerce_sale_flash', '__return_null' );
 
 
 add_filter( 'default_checkout_billing_country', 'change_default_checkout_country' );
-function change_default_checkout_country() {
-
-	/* $geo_instance  = new WC_Geolocation();
+function change_default_checkout_country($country) {
+	//$geo_instance  = new WC_Geolocation();
 	// Get geolocated user geo data.
-	$user_geodata = $geo_instance->geolocate_ip();
+	//$user_geodata = $geo_instance->geolocate_ip();
 	// Get current user GeoIP Country
-	$country = $user_geodata['country']; */
+	//$country = $user_geodata['country'];
 
 	$client_ip = explode(", ", get_client_ip());
-	$details = json_decode(file_get_contents("http://ipinfo.io/{$client_ip[0]}"));
+	//$details = json_decode(file_get_contents("http://ipinfo.io/{$client_ip[0]}"));
+	//return $details->country;
 
-	return $details->country;
+	@$geoplugin = file_get_contents( 'http://www.geoplugin.net/php.gp?ip=' . $client_ip[0] );
+	if ( $geoplugin ) {
+		$geoplugin_arg = unserialize( $geoplugin );
+	}
+
+	return $country = isset( $geoplugin_arg['geoplugin_countryCode'] ) ? $geoplugin_arg['geoplugin_countryCode'] : 'US';
 }
 
 function get_client_ip() {
@@ -714,14 +719,13 @@ function show_product_warranty() {
                         $amount = wc_price( $amount );
                     }
                    // echo '<option value="'. $x .'">'. $value .' '. $duration . ' &mdash; '. $amount .'</option>';
-                    echo '<input type="checkbox" id="warranty_option" name="'. $x .'" value="'. $x .'"><label for="warranty_option">' .get_the_title().' '. $value .' '. $duration . ' Warranty :'. $amount.'<span class="great-deal">Great Deal</span></label>';
+                    echo '<input checked type="checkbox" id="warranty_option" name="'. $x .'" value="'. $x .'"><label for="warranty_option">' .get_the_title().' '. $value .' '. $duration . ' Warranty: '. $amount.'<span class="great-deal">Great Deal</span></label>';
                 }
             }
 
             echo '</p></div>';
         }
     }
-
 }
 
 if( function_exists('acf_add_options_page') ) {
@@ -830,7 +834,6 @@ function do_this_once_daily() {
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$headers[] = 'Cc: patrick.kalns@mcaffic.com';
 		wp_mail( $suppMeta['order_email_addresses'], 'Your Order List', 'Please check your order list attached.',$headers, $filepath);
-		//wp_mail( 'kishan@techtic.com', 'Daily email once testing', 'Daily email once testing', '', $filepath);
 	}
 }
 
@@ -1014,35 +1017,45 @@ function conversion_tracking_thank_you_page($order_id) {
 	$items = $order->get_items();
 	foreach ( $items as $item ) {
 		$product_id = $item->get_product_id();
-		echo get_field( 'iframe_pixel', $product_id );
+		$clickid = $item->get_meta('Click ID');
+		$transactionid = '';
+		if ($clickid) {
+			$transactionid = $clickid;
+		} else {
+			$transactionid = $order_id;
+		}
+		$iframe_pixel = get_field( 'iframe_pixel', $product_id );
+		echo str_replace(array('TRANSACTIONID','{sub3}','{clickid}'), $transactionid, $iframe_pixel);
 	}
 }
 
-// Add a new interval of 180 seconds
-// See http://codex.wordpress.org/Plugin_API/Filter_Reference/cron_schedules
-/* add_filter( 'cron_schedules', 'isa_add_every_three_minutes' );
-function isa_add_every_three_minutes( $schedules ) {
-    $schedules['every_three_minutes'] = array(
-            'interval'  => 180,
-            'display'   => __( 'Every 3 Minutes', 'textdomain' )
-    );
-    return $schedules;
-}
-
-// Schedule an action if it's not already scheduled
-if ( ! wp_next_scheduled( 'isa_add_every_three_minutes' ) ) {
-    wp_schedule_event( time(), 'every_three_minutes', 'isa_add_every_three_minutes' );
-}
-
-// Hook into that action that'll fire every three minutes
-add_action( 'isa_add_every_three_minutes', 'every_three_minutes_event_func' );
-function every_three_minutes_event_func() {
-    wp_mail( 'kishan@techtic.com', 'Automatic email', 'Automatic scheduled email from WordPress.');
-} */
-
+// Add code for random countdown
 add_shortcode( 'rand', 'countdown_rand_func' );
 function countdown_rand_func( $atts ) {
     return rand(49,99);
+}
+
+add_filter('woocommerce_get_cart_item_from_session', 'wdm_get_cart_items_from_session', 1, 3 );
+function wdm_get_cart_items_from_session($item,$values,$key) {
+    if (array_key_exists( 'clickid', $values ) )
+        $item['clickid'] = $values['clickid'];
+    return $item;
+}
+
+/* add_filter('woocommerce_cart_item_name','add_usr_custom_session',1,3);
+function add_usr_custom_session($product_name, $values, $cart_item_key ) {
+    $return_string = $product_name;
+    if ( !empty($values['clickid']) ) {
+   		$return_string.= '<br /><strong>Click ID: </strong> '.$values['clickid'];
+   	}
+    return $return_string;
+} */
+
+add_action('woocommerce_add_order_item_meta','wdm_add_values_to_order_item_meta',1,2);
+function wdm_add_values_to_order_item_meta($item_id, $values) {
+    global $woocommerce, $wpdb;
+    if ( !empty($values['clickid']) )
+        wc_add_order_item_meta($item_id, 'Click ID', $values['clickid']);
 }
 
 // Added Warranty to confirmations email.

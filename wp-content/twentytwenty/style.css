@@ -4729,7 +4729,7 @@ a.to-the-top > * {
 		padding: 8rem 0;
 	}
 
-	
+
 
 
 	/* Site Header --------------------------- */
@@ -5197,7 +5197,7 @@ a.to-the-top > * {
 		font-size: 2.1rem;
 	}
 
-	
+
 	.entry-content h4,
 	.entry-content h5,
 	.entry-content h6 {
@@ -6442,7 +6442,7 @@ span.woocommerce-input-wrapper{margin-bottom: 10px;}
     width: 100%;
     margin-bottom: 20px;
 }
-.step-sec3 select{background: url(../images/drop-down-arrow.png) no-repeat;background-size: 10px; background-position: right 20px center;-moz-appearance: none;-webkit-appearance: none;  border-radius: 4px; box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.02), 0 1px 3px 0 rgba(50, 50, 93, 0.15);background-color: #ffffff;height: 45px;padding: 0 20px;width: 100%;border: none;color: #adb5bd;font-size: 14px;}
+.step-sec3 select{/* background: url(../images/drop-down-arrow.png) no-repeat; */background-size: 10px; background-position: right 20px center;-moz-appearance: none;-webkit-appearance: none;  border-radius: 4px; box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.02), 0 1px 3px 0 rgba(50, 50, 93, 0.15);background-color: #ffffff;height: 45px;padding: 0 20px;width: 100%;border: none;color: #adb5bd;font-size: 14px;}
 .step-sec3 p.form-row input{border:none; border-radius: 4px;box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.02), 0 1px 3px 0 rgba(50, 50, 93, 0.15);background: #ffffff;height: 45px;padding: 0 20px;width: 100%;font-size: 14px;}
 .step-sec3 p.form-row{margin-top: 10px;}
 .step-sec3 h4{margin-bottom: 15px;}
@@ -6481,10 +6481,10 @@ footer .foot-social li .youtube{background: #f00;}
 footer .foot-social li .pinterest{background: #e60023;}
 footer .foot-social li .envelope{background: #EA4335;}
 footer .foot-social li .linkedin{background: #0A66C2;}
-footer .foot-social li .instagram{background: #f09433; 
-background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
-background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
-background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+footer .foot-social li .instagram{background: #f09433;
+background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );}
 footer .foot-social li a:hover{background: #37ba34;}
 footer .foot-social{text-align: center;margin-bottom: 20px;}

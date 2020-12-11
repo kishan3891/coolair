@@ -54,6 +54,13 @@
 	</body>
 </html>
 
+<?php
+$clickid = '';
+if (isset($_GET['clickid']))
+	$clickid = $_GET['clickid'];
+else if (isset($_GET['cbtid']))
+	$clickid = $_GET['cbtid'];
+?>
 
 <?php if (is_product()) { ?>
 	<script type="text/javascript">
@@ -67,8 +74,10 @@
 			var productQty = jQuery('#customer_details input[name=radio-group]:checked').data('qty');
 
 			var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+			var clickid = "<?php echo $clickid; ?>";
+
 			jQuery.ajax({
-				data: {action: 'variation_add_to_cart_func', variationID: variationID, productID: productID, productQty: productQty},
+				data: {action: 'variation_add_to_cart_func', variationID: variationID, productID: productID, productQty: productQty, clickid: clickid},
 				type: 'POST',
 				url: ajaxurl,
 				success: function(data) {
@@ -87,8 +96,10 @@
 			var productID = jQuery('#customer_details input[name=radio-group]:checked').data('productid');
 			var productQty = jQuery('#customer_details input[name=radio-group]:checked').data('qty');
 			var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+			var clickid = "<?php echo $clickid; ?>";
+
 			jQuery.ajax({
-				data: {action: 'variation_add_to_cart_func', isWarranty: isWarranty, productID: productID,variationID: variationID, productID: productID, productQty: productQty},
+				data: {action: 'variation_add_to_cart_func', isWarranty: isWarranty, productID: productID,variationID: variationID, productID: productID, productQty: productQty, clickid: clickid},
 				type: 'POST',
 				url: ajaxurl,
 				success: function(data) {

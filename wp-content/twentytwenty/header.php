@@ -56,8 +56,14 @@
 				$i++;
 			}
 
+			$clickid = '';
+			if (isset($_GET['clickid']))
+				$clickid = $_GET['clickid'];
+			else if (isset($_GET['cbtid']))
+				$clickid = $_GET['cbtid'];
+
 			$woocommerce->cart->empty_cart();
-			$cart_item_data = array('custom_price' => $custom_price);
+			$cart_item_data = array('custom_price' => $custom_price, 'clickid' => $clickid);
 			$woocommerce->cart->add_to_cart($product_id, $var_qty, $variation_id, null, $cart_item_data);
 			$woocommerce->cart->calculate_totals();
 			$woocommerce->cart->set_session();
@@ -76,7 +82,7 @@
 			else { ?>
 				<header>
 					<div class="logo">
-						<?php 
+						<?php
 						if($product_log){?>
 							<div class="site-logo faux-heading">
 								<img src="<?php echo $product_log;?>" class="custom-logo">
@@ -91,7 +97,7 @@
 		}
 		else {
 		?>
-			
+
 			<header id="site-header" class="header-footer-group" role="banner">
 
 				<div class="header-inner section-inner">
@@ -164,7 +170,7 @@
 						}
 						?>
 					</ul>
-					</nav> 
+					</nav>
 					</div>
 
 				</div><!-- .header-inner -->
