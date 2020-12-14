@@ -235,7 +235,7 @@ function twentytwenty_skip_link_focus_fix() {
 add_action( 'wp_print_footer_scripts', 'twentytwenty_skip_link_focus_fix' );
 
 
-// add_action( 'wp_enqueue_scripts', 'twentytwenty_non_latin_languages' );
+add_action( 'wp_enqueue_scripts', 'twentytwenty_non_latin_languages' );
 
 /**
  * Register navigation menus uses wp_nav_menu in five places.
@@ -1042,15 +1042,6 @@ function wdm_get_cart_items_from_session($item,$values,$key) {
     return $item;
 }
 
-/* add_filter('woocommerce_cart_item_name','add_usr_custom_session',1,3);
-function add_usr_custom_session($product_name, $values, $cart_item_key ) {
-    $return_string = $product_name;
-    if ( !empty($values['clickid']) ) {
-   		$return_string.= '<br /><strong>Click ID: </strong> '.$values['clickid'];
-   	}
-    return $return_string;
-} */
-
 add_action('woocommerce_add_order_item_meta','wdm_add_values_to_order_item_meta',1,2);
 function wdm_add_values_to_order_item_meta($item_id, $values) {
     global $woocommerce, $wpdb;
@@ -1061,10 +1052,10 @@ function wdm_add_values_to_order_item_meta($item_id, $values) {
 // Added Warranty to confirmations email.
 add_action( 'woocommerce_order_item_meta_end', 'waf_order_item_meta_end', 10, 4 );
 function waf_order_item_meta_end( $item_id, $item, $order, $plain_text ){
-	$status = $order->status; 
+	$status = $order->status;
 	if($status == 'processing'){
 	$name = $value = $expiry = false;
-	$order_id  = $order->get_id(); 
+	$order_id  = $order->get_id();
 	$order      = wc_get_order( $order_id );
 	$product_warranty = warranty_get_product_warranty( $item['product_id'] );
     $warranty['label'] = $product_warranty['label'];
@@ -1113,4 +1104,17 @@ function wa_get_order_statuses() {
     'wc-completed'  => _x( 'Completed', 'Order status', 'woocommerce' ),
   );
   return apply_filters( 'wa_order_statuses', $order_statuses );
+}
+
+add_filter( 'woocommerce_order_item_get_formatted_meta_data', 'unset_specific_order_item_meta_data', 10, 2);
+function unset_specific_order_item_meta_data($formatted_meta, $item){
+    // Only on emails notifications
+    if( is_admin() || is_wc_endpoint_url() )
+        return $formatted_meta;
+
+    foreach( $formatted_meta as $key => $meta ){
+        if( in_array( $meta->key, array('Click ID') ) )
+            unset($formatted_meta[$key]);
+    }
+    return $formatted_meta;
 }
